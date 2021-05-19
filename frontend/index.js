@@ -17,6 +17,7 @@ const newGameBtn = document.getElementById('newGameButton');
 const joinGameBtn = document.getElementById('joinGameButton');
 const gameCodeInput = document.getElementById('gameCodeInput');
 const gameCodeDisplay = document.getElementById('gameCodeDisplay');
+const toast = document.getElementById('toast');
 
 newGameBtn.addEventListener('click', newGame);
 joinGameBtn.addEventListener('click', joinGame);
@@ -28,6 +29,10 @@ function newGame() {
 
 function joinGame() {
 	const code = gameCodeInput.value;
+	if (!code) {
+		showToast('Enter Game Code!');
+		return;
+	}
 	socket.emit('joinGame', code);
 	init();
 }
@@ -101,9 +106,9 @@ function handleGameOver(data) {
 	gameActive = false;
 
 	if (data.winner === playerNumber) {
-		alert('You Win!');
+		showToast('You Win!');
 	} else {
-		alert('You Lose :(');
+		showToast('You Lose :(');
 	}
 }
 
@@ -113,12 +118,12 @@ function handleGameCode(gameCode) {
 
 function handleUnknownCode() {
 	reset();
-	alert('Unknown Game Code');
+	showToast('Unknown Game Code');
 }
 
 function handleTooManyPlayers() {
 	reset();
-	alert('This game is already in progress');
+	showToast('This game is already in progress');
 }
 
 function reset() {
@@ -127,3 +132,13 @@ function reset() {
 	initialScreen.style.display = 'block';
 	gameScreen.style.display = 'none';
 }
+
+let toastTimer;
+const showToast = (msg) => {
+	toast.innerText = msg;
+	toast.style.transform = 'translate(-50%,30px)';
+	clearTimeout(toastTimer);
+	toastTimer = setTimeout(() => {
+		toast.style.transform = 'translate(-50%,-40px)';
+	}, 5000);
+};

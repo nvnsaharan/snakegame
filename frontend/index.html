@@ -3,13 +3,14 @@
 	<head>
 		<meta charset="UTF-8" />
 		<title>SnakeGame 2</title>
-		<link rel="icon" href="./snake-64.png" />
+		<link rel="icon" href="./images/snake-64.png" />
 		<link
 			rel="stylesheet"
 			href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
 			integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
 			crossorigin="anonymous"
 		/>
+		<link rel="stylesheet" href="style.css" />
 
 		<style>
 			#gameScreen {
@@ -30,29 +31,34 @@
 							h-100
 						"
 					>
-						<h1>Multiplayer Snake</h1>
+						<div class="game_title">
+							<h1 id="game_title_name">
+								SnakeGame<span id="game_title_2">2</span>
+							</h1>
+						</div>
 						<button
 							type="submit"
-							class="btn btn-success"
+							class="btn btnsuccess"
 							id="newGameButton"
 						>
 							Create New Game
 						</button>
-						<div>OR</div>
+						<div id="the_OR">OR</div>
 						<div class="form-group">
 							<input
 								type="text"
 								placeholder="Enter Game Code"
 								id="gameCodeInput"
 							/>
+
+							<button
+								type="submit"
+								class="btn btn-success"
+								id="joinGameButton"
+							>
+								Join Game
+							</button>
 						</div>
-						<button
-							type="submit"
-							class="btn btn-success"
-							id="joinGameButton"
-						>
-							Join Game
-						</button>
 					</div>
 				</div>
 
@@ -66,17 +72,17 @@
 							h-100
 						"
 					>
-						<h1>
+						<div id="gameCodeDisplay_header">
 							Your game code is:
-							<span id="gameCodeDisplay"></span>
-						</h1>
+							<span id="gameCodeDisplay">----</span>
+						</div>
 
 						<canvas id="canvas"></canvas>
 					</div>
 				</div>
 			</div>
 		</section>
-
+		<div id="toast">Blah Blah</div>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
 		<script src="index.js"></script>
 	</body>
